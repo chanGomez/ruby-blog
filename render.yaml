@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: blog
+    env: ruby
+    buildCommand: |
+      apt-get update -y && apt-get install -y libpq-dev
+      bundle install
+    startCommand: bundle exec rails server
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://ruby_blog_db_n46x_user:jI8zFu7mkBzXNGojvslIIdNiZoPKxTT9@dpg-ct709356l47c738d6gug-a/ruby_blog_db_n46x
