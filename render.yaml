@@ -1,11 +1,23 @@
+databases:
+  - name: ruby-blog
+    databaseName: ruby-blog
+    user: ruby-blog
+    plan: free
+
 services:
   - type: web
-    name: blog
-    env: ruby
-    buildCommand: |
-      apt-get update -y && apt-get install -y libpq-dev
-      bundle install
-    startCommand: bundle exec rails server
+    name: ruby-blog
+    runtime: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
+    startCommand: "bundle exec rails server"
     envVars:
-      - key: DATABASE_URL
-        value: postgresql://ruby_blog_db_n46x_user:jI8zFu7mkBzXNGojvslIIdNiZoPKxTT9@dpg-ct709356l47c738d6gug-a/ruby_blog_db_n46x
+      - key: postgresql://ruby_blog_db_n46x_user:jI8zFu7mkBzXNGojvslIIdNiZoPKxTT9@dpg-ct709356l47c738d6gug-a/ruby_blog_db_n46x
+        fromDatabase:
+          name: ruby-blog
+          property: connectionString
+      - key: a1d7f823bf6415b093b2746fe47f681d
+        sync: false
+      - key: WEB_CONCURRENCY
+        value: 2 # sensible default
