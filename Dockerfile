@@ -70,3 +70,16 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 # Start server via Thruster by default, this can be overwritten at runtime
 EXPOSE 80
 CMD ["./bin/thrust", "./bin/rails", "server"]
+
+
+FROM ruby:3.3
+
+# Install dependencies
+RUN apt-get update -y && apt-get install -y libpq-dev
+
+# Set up your Rails app
+WORKDIR /app
+COPY . .
+RUN bundle install
+
+CMD ["bundle", "exec", "rails", "server"]
