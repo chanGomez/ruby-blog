@@ -83,8 +83,8 @@ WORKDIR /app
 COPY . .
 RUN bundle install
 
-CMD ["bundle", "exec", "rails", "server"]
 RUN RAILS_ENV=production bundle exec rails assets:precompile
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
 
 # FROM ruby:3.3
 
