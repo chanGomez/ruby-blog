@@ -75,7 +75,8 @@ CMD ["./bin/thrust", "./bin/rails", "server"]
 FROM ruby:3.3
 
 # Install dependencies
-RUN apt-get update -y && apt-get install -y libpq-dev
+# RUN apt-get update -y && apt-get install -y libpq-dev
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs yarn
 
 # Set up your Rails app
 WORKDIR /app
@@ -83,3 +84,22 @@ COPY . .
 RUN bundle install
 
 CMD ["bundle", "exec", "rails", "server"]
+RUN RAILS_ENV=production bundle exec rails assets:precompile
+
+# FROM ruby:3.3
+
+# # Install dependencies
+# RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs yarn
+
+# # Set working directory
+# WORKDIR /app
+
+# # Install Ruby gems
+# COPY Gemfile Gemfile.lock ./
+# RUN bundle install
+
+# # Copy application files
+# COPY . .
+
+# # Precompile assets
+# RUN RAILS_ENV=production bundle exec rails assets:precompile

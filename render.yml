@@ -11,12 +11,12 @@ services:
     plan: free
     buildCommand: "./bin/render-build.sh"
     # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
-    startCommand: "bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-development}"
+    startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
           name: ruby-blog
-          property: postgresql://ruby_blog_db_n46x_user:jI8zFu7mkBzXNGojvslIIdNiZoPKxTT9@dpg-ct709356l47c738d6gug-a/ruby_blog_db_n46x
+          property: connectionString
       - key: RAILS_MASTER_KEY
         value: a1d7f823bf6415b093b2746fe47f681d
       - key: WEB_CONCURRENCY
