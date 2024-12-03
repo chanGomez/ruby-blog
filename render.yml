@@ -18,7 +18,7 @@ services:
           name: ruby-blog
           property: postgresql://ruby_blog_db_n46x_user:jI8zFu7mkBzXNGojvslIIdNiZoPKxTT9@dpg-ct709356l47c738d6gug-a/ruby_blog_db_n46x
       - key: RAILS_MASTER_KEY
-        sync: false
+        value: a1d7f823bf6415b093b2746fe47f681d
       - key: WEB_CONCURRENCY
         value: 2 # sensible default
       - key: RAILS_ENV

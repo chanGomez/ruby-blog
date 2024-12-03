@@ -26,9 +26,10 @@
 # threads. This includes Active Record's `pool` parameter in `database.yml`.
 
 # Specifies the `bind` address and port dynamically from environment variables
-port ENV.fetch("PORT") { 3000 } # Default to 3000 if no PORT is specified
+port ENV.fetch("PORT") { 3000 }
+environment ENV.fetch("RAILS_ENV") { "development" }
 bind "tcp://0.0.0.0:#{ENV.fetch("PORT", 3000)}"
-puts "Puma is starting on port #{ENV.fetch("PORT", 3000)}!!!!!! "
+
 
 
 threads_count = ENV.fetch("RAILS_MAX_THREADS", 3)
