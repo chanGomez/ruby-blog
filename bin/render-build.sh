@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-apt-get update -y
-apt-get install -y libpq-dev
+# exit on error
+set -o errexit
+
 bundle install
-bundle exec rails db:setup
-bundle exec rails assets:precompile
+chmod +x bin/*
+bundle exec rake db:migrate
